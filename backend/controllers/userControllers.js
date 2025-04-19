@@ -41,25 +41,15 @@ const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
-    console.log("Login successful for user:", user.email); // Add this log
-    const token = generateToken(user._id);
-    console.log("Generated token:", token); // Add this log
-    const responseData = {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      pic: user.pic,
-      token: token,
-    };
-    console.log("Response data:", JSON.stringify(responseData)); // Add this log
-    res.json(responseData);
+    console.log("Login successful for user:", user.email); // Keep this log
+    res.json({ message: "Backend login successful - minimal response" }); // Simplified response for testing
   } else {
-    console.log("Login failed for email:", email); // Add this log
+    console.log("Login failed for email:", email); // Keep this log
     res.status(401);
     throw new Error("Invalid Email or Password");
   }
 });
+
 const allUsers = asyncHandler(async (req, res) => {
   const keyword = req.query.search
     ? {
