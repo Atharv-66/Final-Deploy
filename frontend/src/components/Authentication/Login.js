@@ -117,7 +117,7 @@ const Login = () => {
         colorScheme="blue"
         width="100%"
         style={{ marginTop: 15 }}
-        onClick={submitHandler}
+        onClick={() => { console.log('Login button clicked'); submitHandler(); }}
         isLoading={loading}
         borderRadius="30px"
       >
