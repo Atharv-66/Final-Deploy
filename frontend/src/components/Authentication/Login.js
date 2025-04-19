@@ -64,7 +64,7 @@ const Login = () => {
       });
       setLoading(false);
     }
-    window.location.reload(); // Reverted to original behavior
+    // REMOVED THIS LINE: window.location.reload();
   };
 
   return (
