@@ -41,15 +41,21 @@ const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
-    res.json({
+    console.log("Login successful for user:", user.email); // Add this log
+    const token = generateToken(user._id);
+    console.log("Generated token:", token); // Add this log
+    const responseData = {
       _id: user._id,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
       pic: user.pic,
-      token: generateToken(user._id),
-    });
+      token: token,
+    };
+    console.log("Response data:", JSON.stringify(responseData)); // Add this log
+    res.json(responseData);
   } else {
+    console.log("Login failed for email:", email); // Add this log
     res.status(401);
     throw new Error("Invalid Email or Password");
   }
