@@ -248,7 +248,7 @@ const Signup = () => {
         colorScheme="blue"
         width="100%"
         style={{ marginTop: 15 }}
-        onClick={submitHandler}
+        onClick={() => { console.log('Signup button clicked'); submitHandler(); }}
         isLoading={picLoading}
         borderRadius="30px"
       >
