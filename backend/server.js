@@ -23,6 +23,12 @@ const __dirname1 = path.resolve();
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname1, "/frontend/build")));
 
+  // Handle the root URL for the backend
+  app.get("/", (req, res) => {
+    res.send("Backend API is running...");
+  });
+
+  // This catch-all route is for the frontend's client-side routing
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"));
   });
