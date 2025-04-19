@@ -23,7 +23,12 @@ const __dirname1 = path.resolve();
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname1, "/frontend/build")));
 
-  // Serve frontend for all routes not starting with /api
+  // Explicitly handle the root route for the backend
+  app.get("/", (req, res) => {
+    res.send("Backend API is running in production...");
+  });
+
+  // Serve frontend for all other routes NOT starting with /api
   app.get("*", (req, res) => {
     if (!req.originalUrl.startsWith('/api')) {
       res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"));
